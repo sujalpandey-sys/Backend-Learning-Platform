@@ -51,4 +51,3 @@ def get_current_user_profile(
 ) -> UserResponse:
     """Retrieve the authenticated user's profile."""
     return UserResponse.model_validate(current_user)
-

@@ -10,4 +10,3 @@ api_router.include_router(auth_router)
 api_router.include_router(tasks_router)
 # Include health checks both under /api/v1/health and at root level
 api_router.include_router(health_router)
-

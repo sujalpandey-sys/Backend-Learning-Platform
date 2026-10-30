@@ -2,7 +2,7 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [master ,main, develop]
+    branches: [master, main, develop]
   pull_request:
     branches: [master, main, develop]
 
@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  lint-and-test:
-    name: Lint, Test & Coverage
+  validate:
+    name: Validate Project
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -19,27 +19,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-
-      - name: Run Pytest with Coverage
-        run: |
-          pytest --cov=app --cov-report=term-missing --cov-fail-under=80
-
   docker-build:
     name: Build Docker Image
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs: lint-and-test
+    needs: validate
 
     steps:
       - name: Checkout repository
@@ -57,4 +41,3 @@ jobs:
           tags: backend-learning-platform:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-

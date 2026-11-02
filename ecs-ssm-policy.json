@@ -1,0 +1,12 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ssm:GetParameters"
+      ],
+      "Resource": "arn:aws:ssm:ap-south-1:951395862551:parameter/backend-learning-staging/JWT_SECRET_KEY"
+    }
+  ]
+}
